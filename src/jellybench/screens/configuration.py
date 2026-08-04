@@ -10,10 +10,15 @@ class ConfigurationScreen(Screen):
         yield Static(LOGO, id="logo")
         yield Container(
             Label("Server URL"),
-            Input(self.app.config.server.url, id="url"),
+            Input(self.app.config.server.url, id="url", classes="input"),
             Label("API Key"),
-            Input(self.app.config.server.api_key, id="api_key", password=True),
-            Button("Save", id="save"),
+            Input(
+                self.app.config.server.api_key,
+                id="api_key",
+                password=True,
+                classes="input",
+            ),
+            Button("Save", id="save", classes="btn"),
             id="config-container",
         )
 

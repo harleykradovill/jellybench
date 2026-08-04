@@ -8,6 +8,29 @@ $primary: #fcc179
     content-align: center middle;
 }
 
+/* ================== */
+/* Universal Elements */
+/* ================== */
+.input {
+    width: 30;
+    margin-top: 1;
+}
+
+.input:focus {
+    background: $primary;
+    color: $background;
+}
+
+.btn {
+    width: 30;
+    margin-top: 1;
+}
+
+.btn:focus {
+    background: $primary;
+    color: $background;
+}
+
 /* ================ */
 /* Main Menu Screen */
 /* ================ */
@@ -48,15 +71,5 @@ $primary: #fcc179
 #config-container Label {
     color: $primary;
     text-style: bold;
-    margin-top: 1;
-}
-
-#config-container Input {
-    width: 30;
-    margin-top: 1;
-}
-
-#config-container Button {
-    width: 30;
     margin-top: 1;
 }
