@@ -8,6 +8,10 @@ $primary: #fcc179
     content-align: center middle;
 }
 
+/* ================ */
+/* Main Menu Screen */
+/* ================ */
+
 #menu-container {
     width: 100%;
     height: auto;
@@ -28,4 +32,30 @@ $primary: #fcc179
     width: 100%;
     text-align: center;
     color: $primary;
+}
+
+/* ==================== */
+/* Configuration Screen */
+/* ==================== */
+
+#config-container {
+    width: 40;
+    height: auto;
+    align: center top;
+    margin-top: 3;
+}
+
+#config-container Label {
+    color: $primary;
+    text-style: bold;
+    margin-top: 1;
+}
+
+#config-container Input {
+    margin-top: 1;
+}
+
+#config-container Button {
+    margin-top: 2;
+    width: 100%;
 }
