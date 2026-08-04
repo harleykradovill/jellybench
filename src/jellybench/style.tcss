@@ -1,0 +1,24 @@
+#startup {
+    align: center middle;
+    height: 1fr;
+}
+
+.title {
+    text-style: bold;
+    color: $accent;
+    text-align: center;
+    width: 100%;
+}
+
+.subtitle {
+    color: $text-muted;
+    text-align: center;
+    width: 100%;
+}
+
+.status {
+    margin-top: 2;
+    color: $warning;
+    text-align: center;
+    width: 100%;
+}

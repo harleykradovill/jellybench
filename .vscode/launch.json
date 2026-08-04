@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "configurations": [
+    {
+      "name": "Run JellyBench",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/jellybench/__init__.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
