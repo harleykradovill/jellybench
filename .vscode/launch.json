@@ -5,8 +5,9 @@
       "name": "Run JellyBench",
       "type": "debugpy",
       "request": "launch",
-      "program": "${workspaceFolder}/src/jellybench/__init__.py",
-      "console": "integratedTerminal"
+      "module": "jellybench",
+      "cwd": "${workspaceFolder}/src",
+      "console": "externalTerminal"
     }
   ]
 }

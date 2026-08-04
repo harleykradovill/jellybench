@@ -1,24 +1,31 @@
-#startup {
-    align: center middle;
-    height: 1fr;
-}
+$primary: #fcc179
 
-.title {
+#logo {
+    width: 100%;
+    color: $primary;
     text-style: bold;
-    color: $accent;
-    text-align: center;
-    width: 100%;
+    margin-top: 1;
+    content-align: center middle;
 }
 
-.subtitle {
-    color: $text-muted;
-    text-align: center;
+#menu-container {
     width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
 }
 
-.status {
-    margin-top: 2;
-    color: $warning;
-    text-align: center;
+.optionslist {
+    width: 30;
+    height: auto;
+}
+
+.optionslist ListItem {
+    height: 1;
+}
+
+.optionslist ListItem Label {
     width: 100%;
+    text-align: center;
+    color: $primary;
 }
