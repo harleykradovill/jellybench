@@ -39,10 +39,10 @@ $primary: #fcc179
 /* ==================== */
 
 #config-container {
-    width: 40;
+    width: 100%;
     height: auto;
     align: center top;
-    margin-top: 3;
+    margin-top: 1;
 }
 
 #config-container Label {
@@ -52,10 +52,11 @@ $primary: #fcc179
 }
 
 #config-container Input {
+    width: 30;
     margin-top: 1;
 }
 
 #config-container Button {
-    margin-top: 2;
-    width: 100%;
+    width: 30;
+    margin-top: 1;
 }

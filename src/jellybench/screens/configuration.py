@@ -7,6 +7,7 @@ from textual.widgets import Input, Button, Label, Static
 
 class ConfigurationScreen(Screen):
     def compose(self) -> ComposeResult:
+        yield Static(LOGO, id="logo")
         yield Container(
             Label("Server URL"),
             Input(self.app.config.server.url, id="url"),
