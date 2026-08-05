@@ -1,0 +1,66 @@
+import asyncio
+import time
+
+import httpx
+
+from .base import BenchmarkScenario
+from .metrics import Metrics
+
+
+class BenchmarkRunner:
+    def __init__(
+        self,
+        scenario: BenchmarkScenario,
+        users: int,
+        duration: float,
+        config,
+    ) -> None:
+        self.scenario = scenario
+        self.users = users
+        self.duration = duration
+        self.config = config
+        self.metrics = Metrics()
+        self._stop = asyncio.Event()
+        self._started: float | None = None
+        self._done = False
+        self._active_users = 0
+
+    @property
+    def active_users(self) -> int:
+        return self._active_users
+
+    @property
+    def elapsed(self) -> float:
+        if self._started is None:
+            return 0.0
+        return min(time.monotonic() - self._started, self.duration)
+
+    @property
+    def done(self) -> bool:
+        return self._done
+
+    async def run(self) -> None:
+        headers = {"X-Emby-Token": self.config.server.api_key}
+        async with httpx.AsyncClient(
+            base_url=self.config.server.url.rstrip("/"),
+            headers=headers,
+            timeout=30,
+        ) as client:
+            await self.scenario.setup(client)
+            self._started = time.monotonic()
+            tasks = [asyncio.create_task(self._user(client)) for _ in range(self.users)]
+            await asyncio.sleep(self.duration)
+            self._stop.set()
+            await asyncio.gather(*tasks, return_exceptions=True)
+            self._done = True
+
+    async def _user(self, client: httpx.AsyncClient) -> None:
+        self._active_users += 1
+        try:
+            while not self._stop.is_set():
+                start = time.perf_counter()
+                ok = await self.scenario.run(client)
+                elapsed = (time.perf_counter() - start) * 1000
+                await self.metrics.record(elapsed, ok)
+        finally:
+            self._active_users -= 1

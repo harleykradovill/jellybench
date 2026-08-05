@@ -1,4 +1,5 @@
 from ..ascii import LOGO
+from ..benchmark import ApiBenchmarkScenario
 from textual.app import ComposeResult
 from textual.containers import Container
 from textual.screen import Screen
@@ -28,6 +29,8 @@ class RunBenchmarkScreen(Screen):
             Input("100", id="users", classes="input"),
             Label("Duration"),
             Select(DURATIONS, id="duration", classes="select"),
+            Button("Start Benchmark", id="start", classes="btn"),
+            Button("Go Back", id="return", classes="btn"),
             id="active-benchmark-container",
         )
 
@@ -35,7 +38,16 @@ class RunBenchmarkScreen(Screen):
         if event.button.id == "return":
             self.app.pop_screen()
         elif event.button.id == "start":
-            self.app.push_screen(ActiveBenchmarkScreen())
+            users = int(self.query_one("#users", Input).value)
+            duration = self.query_one("#duration", Select).value
+            self.app.push_screen(
+                ActiveBenchmarkScreen(
+                    scenario=ApiBenchmarkScenario(),
+                    users=users,
+                    duration=duration,
+                    config=self.app.config,
+                )
+            )
 
     def key_down(self) -> None:
         self.focus_next()
