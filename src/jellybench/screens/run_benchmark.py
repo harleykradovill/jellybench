@@ -4,12 +4,10 @@ from textual.containers import Container
 from textual.screen import Screen
 from textual.widgets import Button, Input, Label, Select, Static
 
+from .active_benchmark import ActiveBenchmarkScreen
+
 SCENARIOS = [
-    ("Mixed User Simulation", "mixed"),
-    ("Streaming Test", "streaming"),
-    ("API Stress Test", "api"),
-    ("Library Browsing", "library"),
-    ("Metadata Test", "metadata"),
+    ("API", "api"),
 ]
 
 DURATIONS = [
@@ -30,14 +28,14 @@ class RunBenchmarkScreen(Screen):
             Input("100", id="users", classes="input"),
             Label("Duration"),
             Select(DURATIONS, id="duration", classes="select"),
-            Button("Start Benchmark", id="start", classes="btn"),
-            Button("Go Back", id="return", classes="btn"),
-            id="run-container",
+            id="active-benchmark-container",
         )
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "return":
             self.app.pop_screen()
+        elif event.button.id == "start":
+            self.app.push_screen(ActiveBenchmarkScreen())
 
     def key_down(self) -> None:
         self.focus_next()

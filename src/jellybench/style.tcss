@@ -136,3 +136,19 @@ $surface: #202020;
     text-style: bold;
     margin-top: 1;
 }
+
+/* ======================= */
+/* Active Benchmark Screen */
+/* ======================= */
+
+#active-benchmark-container {
+    width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
+}
+
+#active-benchmark-container Label {
+    color: $primary;
+    text-style: bold;
+}

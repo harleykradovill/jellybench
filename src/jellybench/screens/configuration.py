@@ -26,9 +26,7 @@ class ConfigurationScreen(Screen):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "save":
             self.save()
-
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "return":
+        elif event.button.id == "return":
             self.app.pop_screen()
 
     def key_enter(self) -> None:
