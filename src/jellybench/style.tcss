@@ -32,6 +32,16 @@ $surface: #202020;
     color: $background;
 }
 
+.select {
+    width: 30;
+    margin-top: 1;
+}
+
+.select:focus {
+    background: $primary;
+    color: $background;
+}
+
 .footer {
     dock: bottom;
     width: 100%;
@@ -108,4 +118,21 @@ $surface: #202020;
 
 #server-container .info-value {
     margin-top: 0;
+}
+
+/* ==================== */
+/* Run Benchmark Screen */
+/* ==================== */
+
+#run-container {
+    width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
+}
+
+#run-container Label {
+    color: $primary;
+    text-style: bold;
+    margin-top: 1;
 }

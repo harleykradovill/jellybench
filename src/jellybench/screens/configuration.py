@@ -19,12 +19,17 @@ class ConfigurationScreen(Screen):
                 classes="input",
             ),
             Button("Save", id="save", classes="btn"),
+            Button("Go Back", id="return", classes="btn"),
             id="config-container",
         )
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "save":
             self.save()
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "return":
+            self.app.pop_screen()
 
     def key_enter(self) -> None:
         self.save()
