@@ -4,7 +4,7 @@ import httpx
 from textual.app import ComposeResult
 from textual.containers import Container
 from textual.screen import Screen
-from textual.widgets import Label, Static
+from textual.widgets import Label, Static, Button
 
 from ..ascii import LOGO
 
@@ -42,15 +42,20 @@ class ServerInformation(Screen):
             Label("...", id="shows", classes="info-value"),
             Label("Users", classes="info-sub"),
             Label("...", id="users", classes="info-value"),
+            Button("Go Back", id="return", classes="btn"),
             id="server-container",
         )
-        yield Static("F5 - Refresh", id="footer")
+        yield Static("F5 - Refresh", classes="footer")
 
     def on_mount(self) -> None:
         self.action_refresh()
 
     def action_refresh(self) -> None:
         self.run_worker(self.load(), exclusive=True)
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "return":
+            self.app.pop_screen()
 
     async def load(self) -> None:
         url = self.app.config.server.url.rstrip("/")
