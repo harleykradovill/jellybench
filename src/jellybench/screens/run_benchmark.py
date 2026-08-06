@@ -25,7 +25,7 @@ class RunBenchmarkScreen(Screen):
         yield Container(
             Label("Scenario"),
             Select(SCENARIOS, id="scenario", classes="select"),
-            Label("Virtual Users"),
+            Label("Concurrent Workers"),
             Input("100", id="users", classes="input"),
             Label("Duration"),
             Select(DURATIONS, id="duration", classes="select"),

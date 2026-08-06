@@ -43,7 +43,7 @@ class ActiveBenchmarkScreen(Screen):
             Label("P95  0ms", id="p95"),
             Label("P99  0ms", id="p99"),
             Label("Errors: 0", id="errors"),
-            Button("Go Back", id="return", classes="btn"),
+            Button("Cancel Benchmark", id="return", classes="btn"),
             id="run-container",
         )
 
@@ -72,7 +72,7 @@ class ActiveBenchmarkScreen(Screen):
             f"Runtime: {self._fmt_clock(elapsed)} / {self._fmt_clock(total)}"
         )
         self.query_one("#users", Label).update(
-            f"Users Connected: {self.runner.active_users}/{self.runner.users}"
+            f"Workers Connected: {self.runner.active_users}/{self.runner.users}"
         )
         self.query_one("#requests", Label).update(f"{snap['requests']:,}")
         self.query_one("#throughput", Label).update(
