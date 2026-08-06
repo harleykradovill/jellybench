@@ -1,12 +1,17 @@
+import asyncio
+
+
 class Metrics:
     def __init__(self) -> None:
         self._latencies: list[float] = []
         self._errors = 0
+        self._lock = asyncio.Lock()
 
-    def record(self, latency_ms: float, ok: bool) -> None:
-        self._latencies.append(latency_ms)
-        if not ok:
-            self._errors += 1
+    async def record(self, latency_ms: float, ok: bool) -> None:
+        async with self._lock:
+            self._latencies.append(latency_ms)
+            if not ok:
+                self._errors += 1
 
     def snapshot(self) -> dict:
         lat = sorted(self._latencies)
