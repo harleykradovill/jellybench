@@ -54,6 +54,9 @@ class BenchmarkRunner:
             await asyncio.gather(*tasks, return_exceptions=True)
             self._done = True
 
+    def stop(self) -> None:
+        self._stop.set()
+
     async def _user(self, client: httpx.AsyncClient) -> None:
         self._active_users += 1
         try:

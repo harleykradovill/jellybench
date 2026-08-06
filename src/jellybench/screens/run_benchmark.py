@@ -18,6 +18,13 @@ DURATIONS = [
     ("30 minutes", "30m"),
 ]
 
+WORKERS = [
+    ("5", "5"),
+    ("20", "20"),
+    ("50", "50"),
+    ("100", "100"),
+]
+
 
 class RunBenchmarkScreen(Screen):
     def compose(self) -> ComposeResult:
@@ -26,7 +33,7 @@ class RunBenchmarkScreen(Screen):
             Label("Scenario"),
             Select(SCENARIOS, id="scenario", classes="select"),
             Label("Concurrent Workers"),
-            Input("100", id="users", classes="input"),
+            Select(WORKERS, id="users", classes="select"),
             Label("Duration"),
             Select(DURATIONS, id="duration", classes="select"),
             Button("Start Benchmark", id="start", classes="btn"),
@@ -38,7 +45,7 @@ class RunBenchmarkScreen(Screen):
         if event.button.id == "return":
             self.app.pop_screen()
         elif event.button.id == "start":
-            users = int(self.query_one("#users", Input).value)
+            users = int(self.query_one("#users", Select).value)
             duration = self.query_one("#duration", Select).value
             self.app.push_screen(
                 ActiveBenchmarkScreen(

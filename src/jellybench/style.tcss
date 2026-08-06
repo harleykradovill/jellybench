@@ -34,7 +34,6 @@ $surface: #202020;
 
 .select {
     width: 30;
-    margin-top: 1;
 }
 
 .select:focus {

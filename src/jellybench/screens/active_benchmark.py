@@ -53,6 +53,7 @@ class ActiveBenchmarkScreen(Screen):
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "return":
+            self.runner.stop()
             self.app.pop_screen()
 
     def key_down(self) -> None:
