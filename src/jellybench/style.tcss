@@ -1,6 +1,10 @@
 $primary: #fcc179;
 $surface: #202020;
 
+/* ================== */
+/* Universal Elements */
+/* ================== */
+
 #logo {
     width: 100%;
     color: $primary;
@@ -9,9 +13,6 @@ $surface: #202020;
     content-align: center middle;
 }
 
-/* ================== */
-/* Universal Elements */
-/* ================== */
 .input {
     width: 30;
     margin-top: 1;

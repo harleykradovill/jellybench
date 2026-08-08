@@ -5,6 +5,7 @@ import httpx
 
 from .base import BenchmarkScenario
 from .metrics import Metrics
+from ..storage import save_benchmark
 
 
 class BenchmarkRunner:
@@ -53,6 +54,12 @@ class BenchmarkRunner:
             self._stop.set()
             await asyncio.gather(*tasks, return_exceptions=True)
             self._done = True
+            save_benchmark(
+                scenario=self.scenario.name,
+                duration=self.duration,
+                workers=self.users,
+                results=self.metrics.snapshot(),
+            )
 
     def stop(self) -> None:
         self._stop.set()
