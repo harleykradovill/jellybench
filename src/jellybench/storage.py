@@ -25,7 +25,9 @@ _engine = create_engine(DB_URL)
 Base.metadata.create_all(_engine)
 
 
-def save_benchmark(scenario: str, duration: float, workers: int, results: dict) -> None:
+def save_benchmark(
+    scenario: str, duration: float, workers: int, results: dict
+) -> Benchmark:
     """
     Persist a completed benchmark run.
 
@@ -33,14 +35,15 @@ def save_benchmark(scenario: str, duration: float, workers: int, results: dict) 
     :param duration: Benchmark duration in seconds.
     :param workers: Number of concurrent workers.
     :param results: Metrics snapshot to store as JSON.
+    :returns: The persisted benchmark row
     """
-    with Session(_engine) as session:
-        session.add(
-            Benchmark(
-                scenario=scenario,
-                duration=duration,
-                workers=workers,
-                results=results,
-            )
+    with Session(_engine, expire_on_commit=False) as session:
+        benchmark = Benchmark(
+            scenario=scenario,
+            duration=duration,
+            workers=workers,
+            results=results,
         )
+        session.add(benchmark)
         session.commit()
+        return benchmark

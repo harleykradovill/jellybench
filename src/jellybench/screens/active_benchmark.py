@@ -5,6 +5,7 @@ from textual.widgets import Button, Label, Static
 
 from ..ascii import LOGO
 from ..benchmark import BenchmarkRunner
+from .benchmark_details import BenchmarkDetailsScreen
 
 
 def _parse_duration(value: str) -> float:
@@ -85,6 +86,7 @@ class ActiveBenchmarkScreen(Screen):
         self.query_one("#errors", Label).update(f"Errors: {snap['errors']}")
         if self.runner.done:
             self._timer.stop()
+            self.app.push_screen(BenchmarkDetailsScreen(self.runner.benchmark))
 
     @staticmethod
     def _fmt_clock(seconds: float) -> str:

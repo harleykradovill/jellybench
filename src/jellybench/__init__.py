@@ -4,7 +4,7 @@ from .screens.menu import MainMenu
 
 
 class JellyBenchApp(App):
-    CSS_PATH = "style.tcss"
+    CSS_PATH = "styles.tcss"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

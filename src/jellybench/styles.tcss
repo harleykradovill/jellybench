@@ -152,3 +152,29 @@ $surface: #202020;
     color: $primary;
     text-style: bold;
 }
+
+/* ========================= */
+/* Benchmark Details Screen  */
+/* ========================= */
+
+#details-container {
+    width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
+}
+
+#details-container .info-label {
+    color: $primary;
+    text-style: bold;
+    margin-top: 1;
+}
+
+#details-container .info-sub {
+    color: $primary;
+    margin-top: 1;
+}
+
+#details-container .info-value {
+    margin-top: 0;
+}

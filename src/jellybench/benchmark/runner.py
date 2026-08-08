@@ -25,6 +25,7 @@ class BenchmarkRunner:
         self._started: float | None = None
         self._done = False
         self._active_users = 0
+        self.benchmark = None
 
     @property
     def active_users(self) -> int:
@@ -54,7 +55,7 @@ class BenchmarkRunner:
             self._stop.set()
             await asyncio.gather(*tasks, return_exceptions=True)
             self._done = True
-            save_benchmark(
+            self.benchmark = save_benchmark(
                 scenario=self.scenario.name,
                 duration=self.duration,
                 workers=self.users,
