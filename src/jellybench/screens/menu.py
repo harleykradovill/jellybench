@@ -8,6 +8,7 @@ from ..ascii import LOGO
 from .configuration import ConfigurationScreen
 from .server import ServerInformation
 from .run_benchmark import RunBenchmarkScreen
+from .benchmark_history import BenchmarkHistoryScreen
 
 
 class MainMenu(Screen):
@@ -33,3 +34,5 @@ class MainMenu(Screen):
             self.app.push_screen(ServerInformation())
         elif event.item.id == "benchmark":
             self.app.push_screen(RunBenchmarkScreen())
+        elif event.item.id == "history":
+            self.app.push_screen(BenchmarkHistoryScreen())

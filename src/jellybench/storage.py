@@ -47,3 +47,13 @@ def save_benchmark(
         session.add(benchmark)
         session.commit()
         return benchmark
+
+
+def list_benchmarks() -> list[Benchmark]:
+    """
+    Load all persisted benchmarks, newest first.
+
+    :returns: List of benchmark rows ordered by creation time descending.
+    """
+    with Session(_engine) as session:
+        return session.query(Benchmark).order_by(Benchmark.created_at.desc()).all()

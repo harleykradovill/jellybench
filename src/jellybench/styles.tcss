@@ -178,3 +178,65 @@ $surface: #202020;
 #details-container .info-value {
     margin-top: 0;
 }
+
+/* ======================== */
+/* Benchmark History Screen */
+/* ======================== */
+
+#history-container {
+    width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
+}
+
+#history-table {
+    width: 56;
+    height: auto;
+}
+
+.history-list {
+    width: 100%;
+    height: auto;
+}
+
+.history-list ListItem {
+    height: 1;
+}
+
+.history-list ListItem.highlight {
+    background: $primary;
+}
+
+.history-list ListItem.highlight Label {
+    color: $background;
+}
+
+.row {
+    height: 1;
+}
+
+.cell {
+    width: auto;
+}
+
+.cell-date {
+    width: 20;
+}
+
+.cell-scenario {
+    width: 16;
+}
+
+.cell-duration {
+    width: 10;
+}
+
+.cell-workers {
+    width: 10;
+}
+
+#history-table > .row Label {
+    color: $primary;
+    text-style: bold;
+}
