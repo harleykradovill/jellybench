@@ -78,82 +78,39 @@ class LibraryBenchmarkScenario(BenchmarkScenario):
         return await action(client)
 
     async def _browse_root(self, client: httpx.AsyncClient) -> bool:
-        resp = await client.get(
-            "/Items",
-            params={
-                "userId": self._user_id,
-                "recursive": True,
-                "limit": PAGE_SIZE,
-                "enableImages": False,
-            },
-        )
-        return resp.status_code < 400
+        return await self._items(client)
 
     async def _browse_folder(self, client: httpx.AsyncClient) -> bool:
         if not self._folder_ids:
             return True  # Nothing cached to browse
-        resp = await client.get(
-            "/Items",
-            params={
-                "userId": self._user_id,
-                "parentId": random.choice(self._folder_ids),
-                "recursive": True,
-                "limit": PAGE_SIZE,
-                "enableImages": False,
-            },
-        )
-        return resp.status_code < 400
+        return await self._items(client, parentId=random.choice(self._folder_ids))
 
     async def _paginate(self, client: httpx.AsyncClient) -> bool:
         offset = random.randint(0, max(self._total_items - 1, 0))
-        resp = await client.get(
-            "/Items",
-            params={
-                "userId": self._user_id,
-                "recursive": True,
-                "startIndex": offset,
-                "limit": PAGE_SIZE,
-                "enableImages": False,
-            },
-        )
-        return resp.status_code < 400
+        return await self._items(client, startIndex=offset)
 
     async def _sort(self, client: httpx.AsyncClient) -> bool:
-        resp = await client.get(
-            "/Items",
-            params={
-                "userId": self._user_id,
-                "recursive": True,
-                "sortBy": random.choice(SORT_ORDERS),
-                "sortOrder": random.choice(["Ascending", "Descending"]),
-                "limit": PAGE_SIZE,
-                "enableImages": False,
-            },
+        return await self._items(
+            client,
+            sortBy=random.choice(SORT_ORDERS),
+            sortOrder=random.choice(["Ascending", "Descending"]),
         )
-        return resp.status_code < 400
 
     async def _filter(self, client: httpx.AsyncClient) -> bool:
-        resp = await client.get(
-            "/Items",
-            params={
-                "userId": self._user_id,
-                "recursive": True,
-                "filters": random.choice(FILTERS),
-                "limit": PAGE_SIZE,
-                "enableImages": False,
-            },
-        )
-        return resp.status_code < 400
+        return await self._items(client, filters=random.choice(FILTERS))
 
     async def _by_type(self, client: httpx.AsyncClient) -> bool:
+        return await self._items(client, includeItemTypes=random.choice(ITEM_TYPES))
+
+    async def _items(self, client: httpx.AsyncClient, **extra: object) -> bool:
         resp = await client.get(
             "/Items",
             params={
                 "userId": self._user_id,
                 "recursive": True,
-                "includeItemTypes": random.choice(ITEM_TYPES),
                 "limit": PAGE_SIZE,
                 "enableImages": False,
+                **extra,
             },
         )
         return resp.status_code < 400
