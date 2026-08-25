@@ -78,7 +78,7 @@ class ActiveBenchmarkScreen(Screen):
         )
         self.query_one("#requests", Label).update(f"{snap['requests']:,}")
         self.query_one("#throughput", Label).update(
-            f"{snap['requests'] / elapsed:.0f} req/sec"
+            f"{snap['requests'] / max(elapsed, 1):.0f} req/sec"
         )
         self.query_one("#p50", Label).update(f"P50  {_fmt_ms(snap['p50'])}")
         self.query_one("#p95", Label).update(f"P95  {_fmt_ms(snap['p95'])}")

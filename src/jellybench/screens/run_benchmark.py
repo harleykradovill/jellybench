@@ -1,5 +1,5 @@
 from ..ascii import LOGO
-from ..benchmark import ApiBenchmarkScenario
+from ..benchmark import ApiBenchmarkScenario, LibraryBenchmarkScenario
 from textual.app import ComposeResult
 from textual.containers import Container
 from textual.screen import Screen
@@ -9,6 +9,7 @@ from .active_benchmark import ActiveBenchmarkScreen
 
 SCENARIOS = [
     ("API", "api"),
+    ("Library", "library"),
 ]
 
 DURATIONS = [
@@ -47,14 +48,21 @@ class RunBenchmarkScreen(Screen):
         elif event.button.id == "start":
             users = int(self.query_one("#users", Select).value)
             duration = self.query_one("#duration", Select).value
+            scenario = self.query_one("#scenario", Select).value
             self.app.push_screen(
                 ActiveBenchmarkScreen(
-                    scenario=ApiBenchmarkScenario(),
+                    scenario=self._make_scenario(scenario),
                     users=users,
                     duration=duration,
                     config=self.app.config,
                 )
             )
+
+    @staticmethod
+    def _make_scenario(value: str):
+        if value == "library":
+            return LibraryBenchmarkScenario()
+        return ApiBenchmarkScenario()
 
     def key_down(self) -> None:
         self.focus_next()
