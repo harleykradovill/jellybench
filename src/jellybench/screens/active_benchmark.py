@@ -1,3 +1,4 @@
+import httpx
 from textual.app import ComposeResult
 from textual.containers import Container
 from textual.screen import Screen
@@ -6,6 +7,7 @@ from textual.widgets import Button, Label, Static
 from ..ascii import LOGO
 from ..benchmark import BenchmarkRunner
 from .benchmark_details import BenchmarkDetailsScreen
+from .error import ErrorScreen
 
 
 def _parse_duration(value: str) -> float:
@@ -64,7 +66,22 @@ class ActiveBenchmarkScreen(Screen):
         self.focus_previous()
 
     async def _run(self) -> None:
-        await self.runner.run()
+        try:
+            await self.runner.run()
+        except httpx.HTTPError as error:
+            ErrorScreen.show(
+                self.app,
+                "Benchmark Failed",
+                "Jellybench could not connect to the Jellyfin server.",
+                str(error),
+            )
+        except Exception as error:
+            ErrorScreen.show(
+                self.app,
+                "Unexpected Error",
+                "An unexpected error occurred while running the benchmark.",
+                str(error),
+            )
 
     def _refresh(self) -> None:
         elapsed = self.runner.elapsed

@@ -240,3 +240,30 @@ $surface: #202020;
     color: $primary;
     text-style: bold;
 }
+
+/* ============ */
+/* Error Screen */
+/* ============ */
+
+#error-container {
+    width: 100%;
+    height: auto;
+    align: center top;
+    margin-top: 1;
+}
+
+#error-title {
+    color: #e5484d;
+    text-style: bold;
+    margin-top: 1;
+}
+
+#error-message {
+    color: $primary;
+    margin-top: 1;
+}
+
+#error-detail {
+    color: $text;
+    margin-top: 1;
+}
