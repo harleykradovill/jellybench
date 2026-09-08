@@ -59,7 +59,9 @@ class ServerInformation(Screen):
 
     async def load(self) -> None:
         url = self.app.config.server.url.rstrip("/")
-        headers = {"X-Emby-Token": self.app.config.server.api_key}
+        headers = {
+            "Authorization": f'MediaBrowser Token="{self.app.config.server.api_key}"'
+        }
         try:
             async with httpx.AsyncClient(
                 base_url=url, headers=headers, timeout=10

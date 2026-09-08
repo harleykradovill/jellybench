@@ -42,7 +42,9 @@ class BenchmarkRunner:
         return self._done
 
     async def run(self) -> None:
-        headers = {"X-Emby-Token": self.config.server.api_key}
+        headers = {
+            "Authorization": f'MediaBrowser Token="{self.config.server.api_key}"'
+        }
         async with httpx.AsyncClient(
             base_url=self.config.server.url.rstrip("/"),
             headers=headers,
