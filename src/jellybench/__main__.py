@@ -1,3 +1,3 @@
-from . import JellyBenchApp
+from . import VeloxApp
 
-JellyBenchApp().run()
+VeloxApp().run()

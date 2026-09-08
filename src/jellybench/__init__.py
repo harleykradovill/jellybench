@@ -3,7 +3,7 @@ from .config import Config
 from .screens.menu import MainMenu
 
 
-class JellyBenchApp(App):
+class VeloxApp(App):
     CSS_PATH = "styles.tcss"
 
     def __init__(self, **kwargs):
@@ -15,4 +15,4 @@ class JellyBenchApp(App):
 
 
 if __name__ == "__main__":
-    JellyBenchApp().run()
+    VeloxApp().run()

@@ -79,7 +79,7 @@ class ServerInformation(Screen):
             ErrorScreen.show(
                 self.app,
                 "Server Information Failed",
-                "Jellybench could not load the server information.",
+                "Velox could not load the server information.",
                 str(error),
             )
             return

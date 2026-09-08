@@ -72,7 +72,7 @@ class ActiveBenchmarkScreen(Screen):
             ErrorScreen.show(
                 self.app,
                 "Benchmark Failed",
-                "Jellybench could not connect to the Jellyfin server.",
+                "Velox could not connect to the Jellyfin server.",
                 str(error),
             )
         except Exception as error:

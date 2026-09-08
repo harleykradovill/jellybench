@@ -1,4 +1,4 @@
-# JellyBench
+# Velox
 .github/*
 !.github/workflows/
 src/configuration.yaml

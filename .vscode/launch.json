@@ -2,10 +2,10 @@
   "version": "0.1.0",
   "configurations": [
     {
-      "name": "Run JellyBench",
+      "name": "Run Velox",
       "type": "debugpy",
       "request": "launch",
-      "module": "jellybench",
+      "module": "velox",
       "cwd": "${workspaceFolder}/src",
       "console": "externalTerminal"
     }

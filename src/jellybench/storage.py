@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import JSON, DateTime, Float, Integer, String, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 
-DB_URL = "sqlite:///jellybench.db"
+DB_URL = "sqlite:///velox.db"
 
 
 class Base(DeclarativeBase):
