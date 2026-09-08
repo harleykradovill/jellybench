@@ -84,6 +84,15 @@ class ServerInformation(Screen):
             )
             return
 
+        if any(response.status_code == 401 for response in (info, counts, users)):
+            ErrorScreen.show(
+                self.app,
+                "Unauthorized",
+                "Velox could not authenticate with the server.",
+                "Check the API key in the configuration and try again.",
+            )
+            return
+
         self.query_one("#status", Label).update("● Online")
         self.query_one("#server-name", Label).update(
             _field(info, "serverName", "ServerName")
