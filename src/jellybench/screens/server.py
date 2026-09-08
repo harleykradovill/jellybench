@@ -7,6 +7,7 @@ from textual.screen import Screen
 from textual.widgets import Label, Static, Button
 
 from ..ascii import LOGO
+from .error import ErrorScreen
 
 
 def _field(response: httpx.Response, *keys: str, default: str = "Unknown") -> str:
@@ -73,6 +74,14 @@ class ServerInformation(Screen):
                 )
         except httpx.HTTPError:
             self.query_one("#status", Label).update("● Offline")
+            return
+        except Exception as error:
+            ErrorScreen.show(
+                self.app,
+                "Server Information Failed",
+                "Jellybench could not load the server information.",
+                str(error),
+            )
             return
 
         self.query_one("#status", Label).update("● Online")
